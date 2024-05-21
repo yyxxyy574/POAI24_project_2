@@ -14,8 +14,12 @@ if __name__ == "__main__":
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--train", action="store_true")
     group.add_argument("--test", action="store_true")
+    group.add_argument("--explain", action="store_true")
+    parser.add_argument("--dataset", metavar="file", action="store", default="dataset")
     parser.add_argument("--save-name", metavar="file", action="store", default="model")
     parser.add_argument("--load-from", metavar="file", action="store", default=None)
+    parser.add_argument("--explain-mode", action="store", default="train")
+    parser.add_argument("--image-name", metavar="file", action="store", default="building/47.jpg")
     parser.add_argument("--model", metavar="model", action="store", default="basic")
     parser.add_argument("--augment", action="store_true")
     parser.add_argument("--optimizer", metavar="optimizer", action="store", default="SGD")
@@ -43,7 +47,7 @@ if __name__ == "__main__":
     elif options.model == "advance":
         model = advance.Advance()
     # 构建深度学习框架
-    classfier = Classifier(options.save_name, options.load_from, model, device, augment=options.augment, optimizer=options.optimizer, lr=options.learning_rate, momentum=options.momentum, weight_decay=options.weight_decay)
+    classfier = Classifier(options.dataset, options.save_name, options.load_from, model, device, augment=options.augment, optimizer=options.optimizer, lr=options.learning_rate, momentum=options.momentum, weight_decay=options.weight_decay)
     
     if options.train:
         wandb.init(project="POAI24_project_2", entity="yyxxyy574", name=options.save_name)
@@ -51,3 +55,6 @@ if __name__ == "__main__":
         
     if options.test:
         classfier.evluate()
+    
+    if options.explain:
+        classfier.explain(options.explain_mode, options.image_name)

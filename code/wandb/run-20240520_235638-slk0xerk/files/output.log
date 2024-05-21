@@ -1,0 +1,12 @@
+/home/yxy/miniconda3/envs/ai_hw/lib/python3.11/site-packages/torch/optim/lr_scheduler.py:28: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn("The verbose parameter is deprecated. Please use get_last_lr() "
+Traceback (most recent call last):
+  File "/home/yxy/ai_hw/POAI24_project_2/code/main.py", line 51, in <module>
+    classfier.train()
+  File "/home/yxy/ai_hw/POAI24_project_2/code/classifier.py", line 49, in train
+    train_dataloader = data.load(self.dataset, "train", augment=self.augment)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yxy/ai_hw/POAI24_project_2/code/data.py", line 156, in load
+    transforms.Normalize(mean=MEAN[mode], std=STD[mode])
+                              ~~~~^^^^^^
+KeyError: 'train'

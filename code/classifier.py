@@ -6,17 +6,25 @@ from tqdm import tqdm
 import wandb
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report, confusion_matrix
 import matplotlib.pyplot as plt
+from PIL import Image
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import torchvision.transforms as transforms
+from pytorch_grad_cam import GradCAM
+from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
+from pytorch_grad_cam.utils.image import show_cam_on_image
 
 import data
+from model import basic, advance
 
 # 保存模型及评价指标结果的文件夹路径
-SAVE_DIR = "./results"
+SAVE_DIR = "../results"
 
 class Classifier:
-    def __init__(self, save_name, load_from, model, device, augment, optimizer, lr=1e-3, momentum=1e-4, weight_decay=1e-5):
+    def __init__(self, dataset, save_name, load_from, model, device, augment, optimizer, lr=1e-3, momentum=1e-4, weight_decay=1e-5):
+        # 使用的数据集
+        self.dataset = dataset
         # 保存所用的文件名
         self.save_name = save_name
         # 使用的卷积神经网络模型
@@ -44,8 +52,8 @@ class Classifier:
         # 验证集上最高的正确率，用于保存性能最好的模型
         highest_acc = 0
         # 加载训练集和验证集
-        train_dataloader = data.load("train", augment=self.augment)
-        val_dataloader = data.load("val")
+        train_dataloader = data.load(self.dataset, "train", augment=self.augment)
+        val_dataloader = data.load(self.dataset, "val")
         
         self.model.to(torch.device(self.device))
         
@@ -126,7 +134,7 @@ class Classifier:
     def evluate(self):
         test_y = []
         test_pred = []
-        test_dataloader = data.load("test")
+        test_dataloader = data.load(self.dataset, "test")
         
         self.model.to(torch.device(self.device))
         self.model.eval()
@@ -180,3 +188,27 @@ class Classifier:
                     color='white' if conf_matrix[i, j] > thresh else 'black')
         plt.tight_layout()
         plt.savefig(f"{SAVE_DIR}/{self.save_name}.png")
+        
+    def explain(self, mode, img_name):
+        target_layer = None
+        if isinstance(self.model, basic.Basic):
+            target_layer = [self.model.conv2[-1]]
+        elif isinstance(self.model, advance.Advance):
+            target_layer = [self.model.conv5[-1]]
+        else:
+            print("model is not correct")
+            return
+        input_tensor, input_array = data.load_image(self.dataset, mode, img_name)
+        input_tensor = input_tensor.unsqueeze(dim=0)
+
+        cam = GradCAM(model=self.model, target_layers=target_layer)
+            
+        img_idx = data.CLASS_TO_IDX[self.dataset][img_name.split("/")[0]]
+        img_name = img_name.split("/")[1].split(".")[0]
+        target = [ClassifierOutputTarget(img_idx)]
+        
+        grayscale_cam = cam(input_tensor=input_tensor, targets=target)
+        
+        grayscale_cam = grayscale_cam[0, :]
+        visualization = Image.fromarray(show_cam_on_image(input_array, grayscale_cam, use_rgb=True))
+        visualization.save(f"../results/{self.save_name}_{img_name}_gradcam.png")

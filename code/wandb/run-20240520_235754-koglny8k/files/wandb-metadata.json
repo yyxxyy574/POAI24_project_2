@@ -1,0 +1,215 @@
+{
+    "os": "Linux-6.5.0-35-generic-x86_64-with-glibc2.35",
+    "python": "3.11.9",
+    "heartbeatAt": "2024-05-20T15:57:55.089471",
+    "startedAt": "2024-05-20T15:57:54.189600",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--train",
+        "--dataset=dataset_without_building",
+        "--save-name=advance_augment_Adam_without_building",
+        "--model=advance",
+        "--augment",
+        "--optimizer=Adam"
+    ],
+    "state": "running",
+    "program": "/home/yxy/ai_hw/POAI24_project_2/code/main.py",
+    "codePathLocal": "main.py",
+    "codePath": "code/main.py",
+    "git": {
+        "remote": "https://github.com/yyxxyy574/POAI24_project_2",
+        "commit": "77a9ecafaf76611691683c37dfbff4add5142ce2"
+    },
+    "email": "707001574@qq.com",
+    "root": "/home/yxy/ai_hw/POAI24_project_2",
+    "host": "bigai-ubuntu",
+    "username": "yxy",
+    "executable": "/home/yxy/miniconda3/envs/ai_hw/bin/python",
+    "cpu_count": 16,
+    "cpu_count_logical": 32,
+    "cpu_freq": {
+        "current": 2511.10021875,
+        "min": 2200.0,
+        "max": 3400.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 4327.898,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 3305.487,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 3852.958,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 3856.416,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2873.35,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 3588.478,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 4819.791,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 3851.413,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 3367.377,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 3590.417,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2874.49,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2751.268,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2872.286,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2200.0,
+            "min": 2200.0,
+            "max": 3400.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 1832.2072448730469,
+            "used": 552.1044540405273
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 3090 Ti",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 3090 Ti",
+            "memory_total": 25757220864
+        }
+    ],
+    "memory": {
+        "total": 62.689796447753906
+    }
+}
