@@ -2,6 +2,12 @@
 ```bash
 git clone https://github.com/yyxxyy574/POAI24_project_2.git
 ```
+## 环境准备
+```bash
+conda create -n ai_hw python=3.11
+conda activate ai_hw
+pip install -r requirements.txt
+```
 ## 数据准备
 ```bash
 cd POAI24_project_2
