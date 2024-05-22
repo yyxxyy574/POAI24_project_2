@@ -92,4 +92,4 @@ python main.py --test --dataset=dataset --save-name=basic --load-from=basic --mo
 ```bash
 python main.py --explain --dataset=dataset --save-name=basic --load-from=basic --explain-mode=train --image-name=building/47.jpg --model=basic
 ```
-则`../results/basic_0_gradcam.png`为绘制的热力图
+则`../results/basic_47_gradcam.png`为绘制的热力图
