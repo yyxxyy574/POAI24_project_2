@@ -190,6 +190,7 @@ class Classifier:
         plt.savefig(f"{SAVE_DIR}/{self.save_name}.png")
         
     def explain(self, mode, img_name):
+        # 以提取特征的最后一层作为目标层
         target_layer = None
         if isinstance(self.model, basic.Basic):
             target_layer = [self.model.conv2[-1]]
@@ -198,17 +199,23 @@ class Classifier:
         else:
             print("model is not correct")
             return
+        
+        # 获取被解释图像数据的tensor和array形式
         input_tensor, input_array = data.load_image(self.dataset, mode, img_name)
         input_tensor = input_tensor.unsqueeze(dim=0)
 
+        # 构建GradCAM模型
         cam = GradCAM(model=self.model, target_layers=target_layer)
             
+        # 获取图片对应的类别idx
         img_idx = data.CLASS_TO_IDX[self.dataset][img_name.split("/")[0]]
         img_name = img_name.split("/")[1].split(".")[0]
         target = [ClassifierOutputTarget(img_idx)]
         
+        # 获得热力图
         grayscale_cam = cam(input_tensor=input_tensor, targets=target)
         
+        # 在原图上绘制热力图并保存
         grayscale_cam = grayscale_cam[0, :]
         visualization = Image.fromarray(show_cam_on_image(input_array, grayscale_cam, use_rgb=True))
         visualization.save(f"../results/{self.save_name}_{img_name}_gradcam.png")
